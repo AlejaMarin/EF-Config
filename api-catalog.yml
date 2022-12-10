@@ -1,5 +1,14 @@
 server:
   port: ${PORT:0}
+  
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: catalog-dev
+      username: usr-catalog
+      password: pwd-catalog
 
 eureka:
   client:
@@ -7,3 +16,26 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+
+resilience4j.circuitbreaker:
+  instances:
+    movie-series:
+      registerHealthIndicator: true
+      slidingWindowSize: 5
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowType: COUNT_BASED
+      minimumNumberOfCalls: 20
+      waitDurationInOpenState: 5000
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+
+resilience4j.retry:
+  instances:
+    movie-series:
+      maxAttempts: 2
+      waitDuration: 10000
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
+      retryExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.io.IOException
