@@ -6,7 +6,9 @@ spring:
     mongodb:
       host: localhost
       port: 27017
-      database: series
+      database: series-dev
+      username: usr-series
+      password: pwd-series
 
 eureka:
   client:
