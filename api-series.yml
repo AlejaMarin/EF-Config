@@ -9,6 +9,8 @@ spring:
       database: series-dev
       username: usr-series
       password: pwd-series
+  zipkin:
+    baseUrl: http://localhost:9411/
 
 eureka:
   client:

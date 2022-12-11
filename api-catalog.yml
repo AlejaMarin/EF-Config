@@ -9,6 +9,8 @@ spring:
       database: catalog-dev
       username: usr-catalog
       password: pwd-catalog
+  zipkin:
+    baseUrl: http://localhost:9411/
 
 eureka:
   client:
